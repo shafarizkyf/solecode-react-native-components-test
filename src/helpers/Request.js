@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import axios from 'axios';
 import api from '../routes/api';
 
@@ -9,13 +8,23 @@ const backend = async (method, url, data, params, headers = {}) => {
       url: url.search('http') === -1 ? `${api.BASE_URL}${url}` : url,
       data,
       params,
-      headers
+      headers,
+      withCredentials: method.toUpperCase() === 'GET'
     });
 
     return result;
   } catch (error) {
-    console.log('err Request@backend: ', error);
+    if (error.response?.status === 500) {
+      console.log('error backend', JSON.stringify(error.response.data));
+    } else {
+      console.log('err Request@backend: ', error);
+    }
   }
+};
+
+export const fetchApi = async (request) => {
+  const { method, url, data, params, headers } = await request;
+  return await backend(method, url, data, params, headers);
 };
 
 export default {

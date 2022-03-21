@@ -1,9 +1,16 @@
 import React from 'react';
-import { TextInput, View, Text, StyleSheet } from 'react-native';
+import { TextInput, View, StyleSheet, Platform } from 'react-native';
+import colors from '../../config/colors';
 
-const MyTextInput = ({ label, placeholder, value, onChangeText, secureTextEntry }) => (
-  <View style={style.container}>
-    <Text style={style.label}>{label}</Text>
+const MyTextInput = ({ leftIcon, placeholder, value, onChangeText, secureTextEntry,containerStyle }) => (
+  <View style={[style.container, containerStyle]}>
+    {
+      leftIcon && (
+        <View style={style.leftIcon}>
+          { leftIcon }
+        </View>
+      )
+    }
     <TextInput
       placeholder={placeholder}
       value={value}
@@ -16,19 +23,29 @@ const MyTextInput = ({ label, placeholder, value, onChangeText, secureTextEntry 
 
 const style = StyleSheet.create({
   container: {
-    borderColor: '#000',
-    borderWidth: StyleSheet.hairlineWidth,
-    marginBottom: 10,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 5
-  },
-  label: {
-    fontSize: 10,
-    marginBottom: 5
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.inputTextBackgroundColor,
+    borderColor: colors.inputTextBorderColor,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: Platform.OS === 'ios' ? 13 : 0,
+    height: Platform.OS === 'ios' ? 46 : null,
+    marginBottom: 10
   },
   textInput: {
-    fontSize: 14
+    marginLeft: 10,
+    flex: 1,
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 16,
+    color: colors.inputTextColor,
+  },
+  toggleVisibility: {
+    marginRight: 10
+  },
+  leftIcon: {
+    marginLeft: 15,
+    width: 25
   }
 });
 
