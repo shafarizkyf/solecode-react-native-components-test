@@ -1,28 +1,32 @@
 import React from 'react';
-import { TextInput, View, StyleSheet, Platform } from 'react-native';
+import { TextInput, View, Text, StyleSheet, Platform } from 'react-native';
 import colors from '../../config/colors';
+import styles from '../../config/styles';
 
-const MyTextInput = ({ leftIcon, placeholder, value, onChangeText, secureTextEntry,containerStyle }) => (
-  <View style={[style.container, containerStyle]}>
-    {
-      leftIcon && (
-        <View style={style.leftIcon}>
-          { leftIcon }
-        </View>
-      )
-    }
-    <TextInput
-      placeholder={placeholder}
-      value={value}
-      onChangeText={onChangeText}
-      style={style.textInput}
-      secureTextEntry={secureTextEntry}
-    />
+const MyTextInput = ({ leftIcon, placeholder, value, errorMessage, onChangeText, secureTextEntry, containerStyle }) => (
+  <View style={[styles.mb15, containerStyle]}>
+    <View style={[style.inputContainer]}>
+      {
+        leftIcon && (
+          <View style={style.leftIcon}>
+            { leftIcon }
+          </View>
+        )
+      }
+      <TextInput
+        placeholder={placeholder}
+        value={value}
+        onChangeText={onChangeText}
+        style={style.textInput}
+        secureTextEntry={secureTextEntry}
+      />
+    </View>
+    { errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text> }
   </View>
 );
 
 const style = StyleSheet.create({
-  container: {
+  inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.inputTextBackgroundColor,
@@ -30,8 +34,7 @@ const style = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingVertical: Platform.OS === 'ios' ? 13 : 0,
-    height: Platform.OS === 'ios' ? 46 : null,
-    marginBottom: 10
+    height: Platform.OS === 'ios' ? 46 : null
   },
   textInput: {
     marginLeft: 10,

@@ -9,7 +9,7 @@ export const getToken = async () => {
   return await Storage.get('token');
 };
 
-export const login = (email, password) => ({
+export const login = (email = '', password = '') => ({
   url: `${BASE_URL}/GACS_Command_Center/services/javaLogin/login`,
   method: 'GET',
   data: null,

@@ -10,13 +10,17 @@ import styles from '../../config/styles';
 import Storage from '../../helpers/Storage';
 import RootContext from '../../context/RootContext';
 import { fetchApi } from '../../helpers/Request';
+import validation from './validation';
 
 const LoginScreen = () => {
   const { setAuth } = useContext(RootContext);
-  // const [email, setEmail] = useState('reyhanau.mochammad1@gmail.com');
-  // const [password, setPassword] = useState('password');
-  const [email, setEmail] = useState('testing1.solecode@gmail.com');
+  // const [email, setEmail] = useState();
+  // const [password, setPassword] = useState();
+  const [errors, setErrors] = useState();
+  const [email, setEmail] = useState('reyhanau.mochammad1@gmail.com');
   const [password, setPassword] = useState('password');
+  // const [email, setEmail] = useState('testing1.solecode@gmail.com');
+  // const [password, setPassword] = useState('password');
 
   const onResponse = async (response) => {
     console.log('onResponse', response);
@@ -39,6 +43,7 @@ const LoginScreen = () => {
           placeholder="Enter your email"
           value={email}
           onChangeText={setEmail}
+          errorMessage={errors?.email}
         />
         <MyTextInput
           leftIcon={<Icon name="lock-closed-outline" size={18} color={colors.dark} />}
@@ -46,11 +51,14 @@ const LoginScreen = () => {
           placeholder="Enter your password"
           value={password}
           onChangeText={setPassword}
+          errorMessage={errors?.password}
           secureTextEntry
         />
         <MyButton
           label="Masuk"
           request={login(email, password)}
+          validation={validation({ email, password })}
+          onValidationError={setErrors}
           onStartFetch={() => console.log('onStartFetch')}
           onEndFetch={() => console.log('onEndFetch')}
           onResponse={onResponse}

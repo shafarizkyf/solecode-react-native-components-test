@@ -238,7 +238,7 @@ export default StyleSheet.create({
     color: 'red',
   },
   bgPrimary: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.buttonPrimary,
   },
   bgWhite: {
     backgroundColor: '#fff',
@@ -261,7 +261,7 @@ export default StyleSheet.create({
   },
   errorMessage: {
     fontFamily: 'OpenSans-Regular',
-    color: colors.brandRed,
+    color: colors.buttonPrimary,
     fontSize: 12
   }
 });

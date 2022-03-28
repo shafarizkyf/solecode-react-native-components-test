@@ -2,12 +2,22 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import colors from '../../config/colors';
 import Request from '../../helpers/Request';
+import validate from 'validate.js';
 
-const MyButton = ({ label, request, onResponse, onStartFetch, onEndFetch, onPress: action }) => {
+const MyButton = ({ label, request, validation, onValidationError, onResponse, onStartFetch, onEndFetch, onPress: action }) => {
 
   const onPress = async () => {
-    onStartFetch();
     const { method, url, data, params, headers } = await request;
+    if (validation) {
+      const { data, constraint } = validation;
+      const errors = validate(data, constraint);
+      if (errors !== undefined) {
+        onValidationError(errors);
+        return;
+      }
+    }
+
+    onStartFetch();
     const response = await Request.backend(method, url, data, params, headers);
     onResponse(response);
     onEndFetch();
@@ -35,7 +45,9 @@ const style = StyleSheet.create({
 
 MyButton.defaultProps = {
   onStartFetch: () => null,
-  onEndFetch: () => null
+  onEndFetch: () => null,
+  onValidationError: () => null,
+  validation: null,
 }
 
 export default MyButton;

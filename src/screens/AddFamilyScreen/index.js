@@ -1,14 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { View } from 'react-native';
 import MyButton from '../../components/MyButton';
 import MyTextInput from '../../components/MyTextInput';
 import styles from '../../config/styles';
 import RootContext from '../../context/RootContext';
+import useValidate from '../../hooks/useValidate';
 import { addFamilyMember } from '../../routes/api';
+import validation, { constraint } from './validate';
 
 const AddFamilyScreen = ({ navigation }) => {
   const { auth } = useContext(RootContext);
   const [form, setForm] = useState({});
+  const [errors, setErrors] = useState();
+
+  const validationHooks = useValidate(form, constraint);
+
+  useEffect(() => {
+    console.log('validationHooks', validationHooks);
+    if (validationHooks) {
+      //do something
+    }
+  }, [validationHooks]);
 
   const formData = new FormData;
   formData.append('userAccountId', auth?.userId);
@@ -37,15 +49,19 @@ const AddFamilyScreen = ({ navigation }) => {
         placeholder="Nama Lengkap"
         onChangeText={(value) => onChange('fullName', value)}
         value={form.fullName}
+        errorMessage={errors?.fullName}
       />
       <MyTextInput
         placeholder="NIK"
         onChangeText={(value) => onChange('nik', value)}
         value={form.nik}
+        errorMessage={errors?.nik}
       />
       <MyButton
         label="Add"
         request={addFamilyMember(formData)}
+        validation={validation(form)}
+        onValidationError={setErrors}
         onResponse={onResponse}
       />
     </View>
