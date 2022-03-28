@@ -3,16 +3,18 @@ import { View, Alert } from 'react-native';
 import MyButton from '../../components/MyButton';
 import MyTextInput from '../../components/MyTextInput';
 import RootContext from '../../context/RootContext';
+import useContextAsLocalState from '../../hooks/useContextAsLocalState';
 import { updateProfile } from '../../routes/api';
 
-const ProfilScreen = () => {
+const ProfilScreen = ({ navigation }) => {
   const { auth } = useContext(RootContext);
-  const [form, setForm] = useState({});
+  // const [form, setForm] = useState({});
+  const [form, setForm] = useContextAsLocalState(auth, {});
 
-  useEffect(() => {
-    setForm(auth);
-    console.log('auth', auth);
-  }, [auth]);
+  // useEffect(() => {
+  //   setForm(auth);
+  //   console.log('auth', auth);
+  // }, [auth]);
 
   const onChange = (key, value) => {
     const input = { ...form };
