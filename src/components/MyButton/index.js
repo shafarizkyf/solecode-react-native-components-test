@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import colors from '../../config/colors';
 import Request from '../../helpers/Request';
 
-const MyButton = ({ label, request, validation, onValidationError, onResponse, onStartFetch, onEndFetch, onPress: action }) => {
+const MyButton = ({ label, request, validation, onValidationError, onResponse, onStartApiCall, onEndApiCall, onPress: action }) => {
 
   const onPress = async () => {
     const { method, url, data, params, headers } = await request;
@@ -15,10 +15,10 @@ const MyButton = ({ label, request, validation, onValidationError, onResponse, o
       }
     }
 
-    onStartFetch();
+    onStartApiCall();
     const response = await Request.backend(method, url, data, params, headers);
     onResponse(response);
-    onEndFetch();
+    onEndApiCall();
   };
 
   return (
@@ -42,8 +42,8 @@ const style = StyleSheet.create({
 });
 
 MyButton.defaultProps = {
-  onStartFetch: () => null,
-  onEndFetch: () => null,
+  onStartApiCall: () => null,
+  onEndApiCall: () => null,
   onValidationError: () => null,
   validation: null,
 }

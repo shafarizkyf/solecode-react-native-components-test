@@ -49,8 +49,8 @@ const ProfilScreen = ({ navigation }) => {
           FullName: form.customerName,
           UserId: form.userId
         })}
-        onStartFetch={() => console.log('onStartFetch')}
-        onEndFetch={() => console.log('onEndFetch')}
+        onStartApiCall={() => console.log('onStartApiCall')}
+        onEndApiCall={() => console.log('onEndApiCall')}
         onResponse={onResponse}
       />
     </View>

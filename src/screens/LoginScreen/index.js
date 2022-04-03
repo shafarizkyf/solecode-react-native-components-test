@@ -57,8 +57,8 @@ const LoginScreen = () => {
           request={login(email, password)}
           validation={() => loginFormValidation({ email, password })}
           onValidationError={setErrors}
-          onStartFetch={() => console.log('onStartFetch')}
-          onEndFetch={() => console.log('onEndFetch')}
+          onStartApiCall={() => console.log('onStartApiCall')}
+          onEndApiCall={() => console.log('onEndApiCall')}
           onResponse={onResponse}
         />
       </View>
