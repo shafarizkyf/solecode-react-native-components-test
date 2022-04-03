@@ -1,13 +1,13 @@
 import validate from 'validate.js';
 
 export const constraint = {
-  email: {
+  username: {
     presence: {
-      message: '^Email tidak boleh kosong'
+      message: '^Username tidak boleh kosong'
     },
     exclusion: {
       within: [''],
-      message: '^Email tidak boleh kosong'
+      message: '^Username tidak boleh kosong'
     },
   },
   password: {
@@ -21,6 +21,6 @@ export const constraint = {
   }
 };
 
-const loginFormValidation = (data, rules = constraint) => validate(data, rules);
+const exampleFormValidation = (data, rules = constraint) => validate(data, rules);
 
-export default loginFormValidation;
+export default exampleFormValidation;
