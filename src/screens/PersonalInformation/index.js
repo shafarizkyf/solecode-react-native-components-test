@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import MyButton from '../../components/MyButton';
+import MyFlatList from '../../components/MyFlatList';
 import styles from '../../config/styles';
 import RootContext from '../../context/RootContext';
 import useApiCall from '../../hooks/useApiCall';
@@ -16,6 +17,16 @@ const PersonalInformation = ({ navigation }) => {
         <Text>{information?.KepalaRelationName}</Text>
         <Text>{information?.KepalaFullName}</Text>
       </View>
+
+      <MyFlatList
+        fetchUrl={() => getFamilyMember(auth?.userId)}
+        dataObject="Anggota"
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Text>{item.fullName}</Text>
+        )}
+      />
+
       <View style={styles.mb30}>
         <MyButton
           label="Add Family Member"

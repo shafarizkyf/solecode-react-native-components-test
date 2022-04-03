@@ -28,5 +28,6 @@ export const fetchApi = async (request) => {
 };
 
 export default {
-  backend
+  backend,
+  fetchApi
 };

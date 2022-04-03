@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text } from 'react-native';
-import Request from '../../helpers/Request';
+import { FlatList } from 'react-native';
+import { fetchApi } from '../../helpers/Request';
 
-const MyFlatList = ({ data: predefineData , fetchUrl, renderItem, keyExtractor }) => {
+const MyFlatList = ({ data: predefineData, fetchUrl, dataObject, renderItem, keyExtractor }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -16,8 +16,8 @@ const MyFlatList = ({ data: predefineData , fetchUrl, renderItem, keyExtractor }
   }, [predefineData]);
 
   const fetch = async () => {
-    const response = await Request.backend('GET', fetchUrl);
-    setData(response);
+    const response = await fetchApi(await fetchUrl());
+    setData(dataObject ? response[dataObject] : response);
   };
 
   return (
