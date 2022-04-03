@@ -10,7 +10,7 @@ import styles from '../../config/styles';
 import Storage from '../../helpers/Storage';
 import RootContext from '../../context/RootContext';
 import { fetchApi } from '../../helpers/Request';
-import validation from '../../validations/loginFormValidation';
+import loginFormValidation from '../../validations/loginFormValidation';
 
 const LoginScreen = () => {
   const { setAuth } = useContext(RootContext);
@@ -55,7 +55,7 @@ const LoginScreen = () => {
         <MyButton
           label="Masuk"
           request={login(email, password)}
-          validation={validation({ email, password })}
+          validation={() => loginFormValidation({ email, password })}
           onValidationError={setErrors}
           onStartFetch={() => console.log('onStartFetch')}
           onEndFetch={() => console.log('onEndFetch')}

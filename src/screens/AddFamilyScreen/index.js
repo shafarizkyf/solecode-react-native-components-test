@@ -6,7 +6,7 @@ import styles from '../../config/styles';
 import RootContext from '../../context/RootContext';
 import useValidate from '../../hooks/useValidate';
 import { addFamilyMember } from '../../routes/api';
-import validation, { constraint } from '../../validations/addFamilyFormValidation';
+import addFamilyFormValidation, { constraint } from '../../validations/addFamilyFormValidation';
 
 const AddFamilyScreen = ({ navigation }) => {
   const { auth } = useContext(RootContext);
@@ -60,7 +60,7 @@ const AddFamilyScreen = ({ navigation }) => {
       <MyButton
         label="Add"
         request={addFamilyMember(formData)}
-        validation={validation(form)}
+        validation={() => addFamilyFormValidation(form)}
         onValidationError={setErrors}
         onResponse={onResponse}
       />

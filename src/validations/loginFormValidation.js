@@ -1,3 +1,5 @@
+import validate from 'validate.js';
+
 export const constraint = {
   email: {
     presence: {
@@ -19,6 +21,6 @@ export const constraint = {
   }
 };
 
-const validation = (data) => ({ data, constraint });
+const loginFormValidation = (data, rules = constraint) => validate(data, rules);
 
-export default validation;
+export default loginFormValidation;
