@@ -3,12 +3,12 @@ import { View, Text } from 'react-native';
 import MyButton from '../../components/MyButton';
 import styles from '../../config/styles';
 import RootContext from '../../context/RootContext';
-import useFetchData from '../../hooks/useFetchData';
+import useApiCall from '../../hooks/useApiCall';
 import { getFamilyMember } from '../../routes/api';
 
 const PersonalInformation = ({ navigation }) => {
   const { auth } = useContext(RootContext);
-  const information = useFetchData(getFamilyMember(auth?.userId));
+  const information = useApiCall(getFamilyMember(auth?.userId));
 
   return (
     <View style={[styles.flex1, styles.p20]}>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Request from '../helpers/Request';
 
-const useFetchData = (request) => {
+const useApiCall = (request) => {
   const [response, setResponse] = useState(null);
 
   useEffect(() => {
@@ -17,4 +17,4 @@ const useFetchData = (request) => {
   return response;
 };
 
-export default useFetchData;
+export default useApiCall;

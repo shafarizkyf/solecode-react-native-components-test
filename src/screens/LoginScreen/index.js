@@ -10,17 +10,15 @@ import styles from '../../config/styles';
 import Storage from '../../helpers/Storage';
 import RootContext from '../../context/RootContext';
 import { fetchApi } from '../../helpers/Request';
-import validation from './validation';
+import validation from '../../validations/loginFormValidation';
 
 const LoginScreen = () => {
   const { setAuth } = useContext(RootContext);
   // const [email, setEmail] = useState();
   // const [password, setPassword] = useState();
-  const [errors, setErrors] = useState();
   const [email, setEmail] = useState('reyhanau.mochammad1@gmail.com');
   const [password, setPassword] = useState('password');
-  // const [email, setEmail] = useState('testing1.solecode@gmail.com');
-  // const [password, setPassword] = useState('password');
+  const [errors, setErrors] = useState();
 
   const onResponse = async (response) => {
     console.log('onResponse', response);

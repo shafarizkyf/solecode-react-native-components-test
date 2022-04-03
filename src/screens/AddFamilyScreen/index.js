@@ -6,7 +6,7 @@ import styles from '../../config/styles';
 import RootContext from '../../context/RootContext';
 import useValidate from '../../hooks/useValidate';
 import { addFamilyMember } from '../../routes/api';
-import validation, { constraint } from './validate';
+import validation, { constraint } from '../../validations/addFamilyFormValidation';
 
 const AddFamilyScreen = ({ navigation }) => {
   const { auth } = useContext(RootContext);
